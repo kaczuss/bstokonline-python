@@ -1,0 +1,1 @@
+Odczyt i notyfikacja o ogłoszeniach z bstok online
