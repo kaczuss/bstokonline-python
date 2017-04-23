@@ -12,8 +12,9 @@ class OfferParser(object):
 
     def parse(self, tag):
         offer = Offer()
-        print(tag.attrs)
         offer.premium = "premium" in tag.attrs['class']
+        offer.href = tag.div.a['href']
+        offer.title = tag.div.a.getText()
         return offer
 
 
