@@ -2,3 +2,4 @@
 *.iml
 /app_config.py
 *.py[c]
+__pycache__/
