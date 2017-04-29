@@ -22,7 +22,7 @@ class TestOffersFinder(TestCase):
         finder = OffersFinder()
         offers = finder.get_latest_offers(datetime.strptime('2017-04-22 12:11:56', '%Y-%m-%d %H:%M:%S'))
         url_open.assert_called_with('http://www.bialystokonline.pl/domy-mieszkania-sprzedam,ogloszenia,5,1.html')
-        self.assertEqual(offers.__len__(), 25)
+        self.assertEqual(offers.__len__(), 9)
 
 
 

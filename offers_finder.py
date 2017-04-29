@@ -12,7 +12,7 @@ class OffersFinder(object):
         url = 'http://www.bialystokonline.pl/domy-mieszkania-sprzedam,ogloszenia,5,1.html'
         data = urlopen(url).read()
         offers = self.get_offers(data)
-        # offers = filter(lambda o: o.creationDate > since, offers)
+        offers = filter(lambda o: o.creationDate > since, offers)
         return list(offers)
 
     def get_offers(self, html):
