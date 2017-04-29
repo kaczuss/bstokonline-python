@@ -23,9 +23,9 @@ class OfferParser(object):
         offer.premium = "premium" in tag.attrs['class']
         offer.href = tag.div.a['href']
         offer.title = tag.div.a.getText()
-        creationData = tag.find('div', 'author')
-        offer.addedDate = datetime.strptime(creationData.span.getText()[8:], '%Y-%m-%d %H:%M:%S')
-        # tag.find('div','author').span.find_next_sibling('span')
+        creation_data = tag.find('div', 'author')
+        offer.addedDate = datetime.strptime(creation_data.span.getText()[8:], '%Y-%m-%d %H:%M:%S')
+        offer.id = creation_data.span.find_next_sibling('span').getText()[3:]
         return offer
 
 
