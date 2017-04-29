@@ -9,11 +9,17 @@ class OffersFinder(object):
         self.offers_parser = OfferParser()
 
     def get_latest_offers(self, since):
-        url = 'http://www.bialystokonline.pl/domy-mieszkania-sprzedam,ogloszenia,5,1.html'
-        data = urlopen(url).read()
-        offers = self.get_offers(data)
-        offers = filter(lambda o: o.creationDate > since, offers)
-        return list(offers)
+        all_offers = list()
+        for i in range(1, 6):
+            url = 'http://www.bialystokonline.pl/domy-mieszkania-sprzedam,ogloszenia,5,{}.html'.format(i)
+            data = urlopen(url).read()
+            offers = self.get_offers(data)
+            filtered = list(filter(lambda o: o.creationDate > since, offers))
+            all_offers.extend(filtered)
+            if filtered.__len__() < offers.__len__():
+                return all_offers
+
+        return all_offers
 
     def get_offers(self, html):
         soup = BeautifulSoup(html, 'html.parser')
