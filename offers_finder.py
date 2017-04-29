@@ -1,3 +1,4 @@
+from datetime import datetime
 from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
@@ -22,6 +23,9 @@ class OfferParser(object):
         offer.premium = "premium" in tag.attrs['class']
         offer.href = tag.div.a['href']
         offer.title = tag.div.a.getText()
+        creationData = tag.find('div', 'author')
+        offer.addedDate = datetime.strptime(creationData.span.getText()[8:], '%Y-%m-%d %H:%M:%S')
+        # tag.find('div','author').span.find_next_sibling('span')
         return offer
 
 
