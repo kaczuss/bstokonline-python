@@ -26,6 +26,11 @@ class OfferParser(object):
         creation_data = tag.find('div', 'author')
         offer.addedDate = datetime.strptime(creation_data.span.getText()[8:], '%Y-%m-%d %H:%M:%S')
         offer.id = creation_data.span.find_next_sibling('span').getText()[3:]
+        user_data = creation_data.span.find_next_sibling('span').find_next_sibling('span')
+        if user_data is not None:
+            offer.user = creation_data.span.find_next_sibling('span').find_next_sibling('span').getText()[12:]
+        else:
+            offer.user = None
         return offer
 
 
