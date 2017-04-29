@@ -1,3 +1,4 @@
 .idea/
 *.iml
 /app_config.py
+*.py[c]
