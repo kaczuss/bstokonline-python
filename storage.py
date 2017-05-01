@@ -26,9 +26,10 @@ class OffersStorage(object):
             '_id' : offer._id,
             'creation_date' : offer.creation_date,
             'premium' : offer.premium,
-            'href' : offer.href,
+            'url' : offer.url,
             'title' : offer.title,
-            'user' : offer.user
+            'user' : offer.user,
+            'description' : offer.description
         })
 
         print("saved in mongo {}".format(result))
@@ -44,5 +45,5 @@ class OffersStorage(object):
         count = result.count()
         if count > 0:
             return result.next()['creation_date']
-        return datetime.now() - timedelta(days=1)
+        return datetime.now() - timedelta(days=7)
 

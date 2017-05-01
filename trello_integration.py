@@ -21,7 +21,10 @@ class Trello(object):
         list = self.get_list(board)
         for offer in offers:
             print("added card {}".format(offer.title))
-            list.add_card(offer.title, "Utworzony: {}".format(offer.creation_date))
+            title = offer.title
+            if offer.premium:
+                title = "[PREMIUM]" + offer.title
+            list.add_card(title, "link: {}\n\n{}\ntworca:{}\nUtworzony: {}".format(offer.url, offer.description, offer.user, offer.creation_date))
 
     def get_list(self, board):
         lists = board.list_lists()

@@ -33,7 +33,8 @@ class OfferParser(object):
     def parse(self, tag):
         offer = Offer()
         offer.premium = "premium" in tag.attrs['class']
-        offer.href = tag.div.a['href']
+        offer.url = "http://www.bialystokonline.pl/" + tag.div.a['href']
+        offer.description = tag.find('div', "content").getText()
         offer.title = tag.div.a.getText()
         creation_data = tag.find('div', 'author')
         offer.creation_date = datetime.strptime(creation_data.span.getText()[8:], '%Y-%m-%d %H:%M:%S')
