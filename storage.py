@@ -25,5 +25,5 @@ class OffersStorage(object):
         # count = result.count()
         # if count > 0:
         #     return result.next().created_date
-        return datetime.now() - timedelta(days=14)
+        return datetime.now() - timedelta(days=1)
 
