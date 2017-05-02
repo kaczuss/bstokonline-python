@@ -24,7 +24,9 @@ class Trello(object):
             title = offer.title
             if offer.premium:
                 title = "[PREMIUM]" + offer.title
-            list.add_card(title, "link: {}\n\n{}\ntworca:{}\nUtworzony: {}".format(offer.url, offer.description, offer.user, offer.creation_date))
+            if offer.price:
+                title = "[{}]{}".format(offer.price, title)
+            list.add_card(title, "link: {}\nlink2:{}\n\n{}\ntworca:{}\nUtworzony: {}".format(offer.url, offer.extra_url, offer.description, offer.user, offer.creation_date))
 
     def get_list(self, board):
         lists = board.list_lists()

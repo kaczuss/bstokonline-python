@@ -16,6 +16,8 @@ class TestOfferParser(TestCase):
         self.assertEqual(offer.title, "Polecamy dom murowany, wolnostojący na osiedlu Dojlidy Górne.")
         self.assertEqual(offer.creation_date, datetime.strptime('2017-04-22 09:17:44', '%Y-%m-%d %H:%M:%S'))
         self.assertEqual(offer._id, '4169506')
+        self.assertEqual(offer.price, '540 000 zł')
+        self.assertEqual(offer.extra_url, 'http://www.ikafi-nieruchomosci.pl/index.php?site=sd&id=1665&NumerOferty=722/a')
         self.assertFalse(offer.user, None)
 
     def test_parse_ogloszenie_zwykle(self):
@@ -29,3 +31,5 @@ class TestOfferParser(TestCase):
         self.assertEqual(offer._id, '4169790')
         self.assertEqual(offer.user, 'Lipowa49')
         self.assertTrue(offer.description.startswith('Dom Tyniewicze Małe \n\n'))
+        self.assertEqual(offer.price, None)
+        self.assertEqual(offer.extra_url, None)

@@ -44,6 +44,17 @@ class OfferParser(object):
             offer.user = creation_data.span.find_next_sibling('span').find_next_sibling('span').getText()[12:]
         else:
             offer.user = None
+        price_tag = tag.find('div', 'price')
+        if price_tag is not None:
+            offer.price = price_tag.span.getText()
+        else:
+            offer.price = None
+
+        url_tag = tag.find('div', 'url')
+        if url_tag is not None:
+            offer.extra_url = url_tag.a['href']
+        else:
+            offer.extra_url = None
 
         return offer
 

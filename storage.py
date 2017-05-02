@@ -29,7 +29,9 @@ class OffersStorage(object):
             'url' : offer.url,
             'title' : offer.title,
             'user' : offer.user,
-            'description' : offer.description
+            'description' : offer.description,
+            'extral_url' : offer.extral_url,
+            'price' : offer.price
         })
 
         print("saved in mongo {}".format(result))
