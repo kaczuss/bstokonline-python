@@ -20,7 +20,7 @@ class Trello(object):
 
         list = self.get_list(board)
         for offer in offers:
-            print("added card {}".format(offer.title))
+#            print("added card {}".format(offer.title))
             title = offer.title
             if offer.premium:
                 title = "[PREMIUM]" + offer.title
