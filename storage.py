@@ -30,7 +30,7 @@ class OffersStorage(object):
             'title' : offer.title,
             'user' : offer.user,
             'description' : offer.description,
-            'extral_url' : offer.extral_url,
+            'extra_url' : offer.extra_url,
             'price' : offer.price
         })
 
