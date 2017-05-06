@@ -4,3 +4,4 @@
 *.py[c]
 __pycache__/
 /app_config_test.py
+*.tar

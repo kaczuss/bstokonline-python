@@ -28,7 +28,7 @@ class Trello(object):
                 title = "[PREMIUM]" + offer.title
             if offer.price:
                 title = "[{}]{}".format(offer.price, title)
-            list.add_card(title, "link: {}\nlink2:{}\n\n{}\ntworca:{}\nUtworzony: {}".format(offer.url, offer.extra_url,
+            list.add_card(title, "link: {}\nlink2: {}\n\n{}\ntworca: {}\nUtworzony: {}".format(offer.url, offer.extra_url,
                                                                                              offer.description,
                                                                                              offer.user,
                                                                                              offer.creation_date))
