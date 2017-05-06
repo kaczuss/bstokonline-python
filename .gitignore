@@ -1,5 +1,6 @@
 .idea/
 *.iml
-/app_config.py
+/app_config_prod.py
 *.py[c]
 __pycache__/
+/app_config_test.py

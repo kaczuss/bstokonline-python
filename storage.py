@@ -1,11 +1,12 @@
-import json
+import importlib
+import os
 from datetime import datetime, timedelta
 
 import pymongo
 from json import JSONEncoder
 from pymongo import MongoClient
 
-import app_config
+app_config = importlib.import_module('app_config_{}'.format(os.getenv('bstok_env')))
 
 
 class OfferEncoder(JSONEncoder):
@@ -38,7 +39,7 @@ class OffersStorage(object):
 
 
     def __get_collection(self):
-        collection = self.db.get_collection('contacts')
+        collection = self.db.get_collection(app_config.COLLECTION_NAME)
         return collection
 
     def find_latest_date(self):

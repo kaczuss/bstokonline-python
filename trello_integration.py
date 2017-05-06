@@ -1,10 +1,11 @@
-from trello import TrelloClient
+import importlib
 
-import app_config
+from trello import TrelloClient
+import os
+
+app_config = importlib.import_module('app_config_{}'.format(os.getenv('bstok_env')))
 
 LIST_NEW_OFFERS = "nowe"
-
-BOARD_OFFERS_NAME = "Ogloszenia"
 
 
 class Trello(object):
@@ -14,19 +15,23 @@ class Trello(object):
             api_secret=app_config.API_SECRET,
             token=app_config.TOKEN
         )
+        self.boardName = app_config.BOARD_NAME
 
     def add_offers(self, offers):
         board = self.get_board()
 
         list = self.get_list(board)
         for offer in offers:
-#            print("added card {}".format(offer.title))
+            #            print("added card {}".format(offer.title))
             title = offer.title
             if offer.premium:
                 title = "[PREMIUM]" + offer.title
             if offer.price:
                 title = "[{}]{}".format(offer.price, title)
-            list.add_card(title, "link: {}\nlink2:{}\n\n{}\ntworca:{}\nUtworzony: {}".format(offer.url, offer.extra_url, offer.description, offer.user, offer.creation_date))
+            list.add_card(title, "link: {}\nlink2:{}\n\n{}\ntworca:{}\nUtworzony: {}".format(offer.url, offer.extra_url,
+                                                                                             offer.description,
+                                                                                             offer.user,
+                                                                                             offer.creation_date))
 
     def get_list(self, board):
         lists = board.list_lists()
@@ -40,7 +45,7 @@ class Trello(object):
         boards = self.client.list_boards()
 
         for b in boards:
-            if b.name == BOARD_OFFERS_NAME:
+            if b.name == self.boardName:
                 return b
 
-        return self.client.add_board(BOARD_OFFERS_NAME)
+        return self.client.add_board(self.boardName)

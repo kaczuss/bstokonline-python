@@ -1,6 +1,14 @@
+import os
+
+if os.getenv('bstok_env') is None:
+    os.environ['bstok_env'] = 'test'
+
+print(os.environ['bstok_env'])
+
+from trello_integration import Trello
 from offers_finder import OffersFinder
 from storage import OffersStorage
-from trello_integration import Trello
+
 
 storage = OffersStorage()
 last_offer_date = storage.find_latest_date()
