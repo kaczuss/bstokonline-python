@@ -5,3 +5,4 @@
 __pycache__/
 /app_config_test.py
 *.tar
+deploy.sh
