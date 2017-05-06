@@ -50,3 +50,8 @@ class OffersStorage(object):
             return result.next()['creation_date']
         return datetime.now() - timedelta(days=7)
 
+    def find_all(self):
+        collection = self.__get_collection()
+        return collection.find().sort("creation_date", pymongo.DESCENDING)
+
+
