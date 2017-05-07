@@ -17,13 +17,13 @@ finder = OffersFinder()
 offers = finder.get_latest_offers(last_offer_date)
 
 
-def is_new_offer(offer, old_offers):
-    for old_offer in old_offers:
-        if old_offer['title'] == offer.title:
+def is_new_offer(new_offer, offers_to_ignore):
+    for old_offer in offers_to_ignore:
+        if old_offer['title'] == new_offer.title:
             return False
     return True
 
-
+print('found new {} offers'.format(offers.__len__()))
 for offer in offers:
     if is_new_offer(offer, old_offers):
         Trello().add_offers([offer])

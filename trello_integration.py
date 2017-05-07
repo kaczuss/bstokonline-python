@@ -20,18 +20,18 @@ class Trello(object):
     def add_offers(self, offers):
         board = self.get_board()
 
-        list = self.get_list(board)
+        cards = self.get_list(board)
         for offer in offers:
-            #            print("added card {}".format(offer.title))
             title = offer.title
             if offer.premium:
                 title = "[PREMIUM]" + offer.title
             if offer.price:
                 title = "[{}]{}".format(offer.price, title)
-            list.add_card(title, "link: {}\nlink2: {}\n\n{}\ntworca: {}\nUtworzony: {}".format(offer.url, offer.extra_url,
-                                                                                             offer.description,
-                                                                                             offer.user,
-                                                                                             offer.creation_date))
+            cards.add_card(title,
+                           "link: {}\nlink2: {}\n\n{}\ntworca: {}\nUtworzony: {}".format(offer.url, offer.extra_url,
+                                                                                         offer.description,
+                                                                                         offer.user,
+                                                                                         offer.creation_date))
             print("added card {}".format(title))
 
     def get_list(self, board):
