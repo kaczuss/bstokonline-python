@@ -1,4 +1,4 @@
 #!/bin/bash
 
 
-python3.5 app.py
+python3.5 -u app.py

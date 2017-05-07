@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 
 ENV TERM xterm
+ENV PYTHONUNBUFFERED=0
 
 COPY requirements.txt /srv
 #lepiej w jednej linijce, to jest redukcja liczby warstw, dodatkowo czyszczenie, zeby zmniejszyc obraz
@@ -12,7 +13,7 @@ RUN apt-get -y update && \
     apt-get -y clean
 COPY . /srv
 WORKDIR /srv
-CMD ["watch","--interval=3600","./run.sh"]
+CMD ["watch","--interval=1800","./run.sh"]
 
 
 

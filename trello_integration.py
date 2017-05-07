@@ -32,12 +32,13 @@ class Trello(object):
                                                                                              offer.description,
                                                                                              offer.user,
                                                                                              offer.creation_date))
+            print("added card {}".format(title))
 
     def get_list(self, board):
         lists = board.list_lists()
-        for list in lists:
-            if list.name == LIST_NEW_OFFERS:
-                return list
+        for offers_list in lists:
+            if offers_list.name == LIST_NEW_OFFERS:
+                return offers_list
 
         return board.add_list(LIST_NEW_OFFERS)
 

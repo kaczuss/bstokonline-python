@@ -12,7 +12,7 @@ from storage import OffersStorage
 storage = OffersStorage()
 last_offer_date = storage.find_latest_date()
 old_offers = storage.find_all()
-# print("latest offer from {}".format(last_offer_date))
+print("latest offer from {}".format(last_offer_date))
 finder = OffersFinder()
 offers = finder.get_latest_offers(last_offer_date)
 
@@ -28,6 +28,7 @@ for offer in offers:
     if is_new_offer(offer, old_offers):
         Trello().add_offers([offer])
         storage.store(offer)
+        print('offer added {}'.format(offer._id))
     else:
         print('offer already added {}'.format(offer._id))
 

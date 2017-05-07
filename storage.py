@@ -10,11 +10,11 @@ app_config = importlib.import_module('app_config_{}'.format(os.getenv('bstok_env
 
 
 class OfferEncoder(JSONEncoder):
-
     def default(self, o):
         if isinstance(o, datetime):
             return o.isoformat()
         return o.__dict__
+
 
 class OffersStorage(object):
     def __init__(self) -> None:
@@ -24,19 +24,18 @@ class OffersStorage(object):
     def store(self, offer):
         collection = self.__get_collection()
         result = collection.insert_one({
-            '_id' : offer._id,
-            'creation_date' : offer.creation_date,
-            'premium' : offer.premium,
-            'url' : offer.url,
-            'title' : offer.title,
-            'user' : offer.user,
-            'description' : offer.description,
-            'extra_url' : offer.extra_url,
-            'price' : offer.price
+            '_id': offer._id,
+            'creation_date': offer.creation_date,
+            'premium': offer.premium,
+            'url': offer.url,
+            'title': offer.title,
+            'user': offer.user,
+            'description': offer.description,
+            'extra_url': offer.extra_url,
+            'price': offer.price
         })
 
         print("saved in mongo {}".format(result))
-
 
     def __get_collection(self):
         collection = self.db.get_collection(app_config.COLLECTION_NAME)
@@ -53,5 +52,3 @@ class OffersStorage(object):
     def find_all(self):
         collection = self.__get_collection()
         return collection.find().sort("creation_date", pymongo.DESCENDING)
-
-
