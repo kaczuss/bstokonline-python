@@ -13,7 +13,8 @@ RUN apt-get -y update && \
     apt-get -y clean
 COPY . /srv
 WORKDIR /srv
-CMD ["watch","--interval=1800","./run.sh"]
+
+CMD ["./run.sh"]
 
 
 
