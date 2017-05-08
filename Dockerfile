@@ -1,8 +1,5 @@
 FROM ubuntu:16.04
 
-ENV TERM xterm
-ENV PYTHONUNBUFFERED=0
-
 COPY requirements.txt /srv
 #lepiej w jednej linijce, to jest redukcja liczby warstw, dodatkowo czyszczenie, zeby zmniejszyc obraz
 RUN apt-get -y update && \
@@ -11,7 +8,9 @@ RUN apt-get -y update && \
     pip3 install -r /srv/requirements.txt && \
     apt-get -y autoremove && \
     apt-get -y clean
+
 COPY . /srv
+
 WORKDIR /srv
 
 CMD ["./run.sh"]
