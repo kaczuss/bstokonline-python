@@ -30,7 +30,7 @@ def run():
         if is_new_offer(offer, old_offers):
             Trello().add_offers([offer])
             storage.store(offer)
-            print('offer added {} with title {}'.format(offer._id, offer.title.encode('utf-8')))
+            print('offer added {} with title {}'.format(offer._id, offer.title))
         else:
             print('offer already added {}'.format(offer._id))
 

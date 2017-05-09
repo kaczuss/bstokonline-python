@@ -11,6 +11,8 @@ RUN apt-get -y update && \
 
 COPY . /srv
 
+ENV PYTHONIOENCODING UTF-8
+
 WORKDIR /srv
 
 CMD ["./run.sh"]
