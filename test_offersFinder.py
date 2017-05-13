@@ -29,6 +29,8 @@ class TestOffersFinder(TestCase):
         offers = finder.get_latest_offers(datetime.strptime('2017-04-22 12:11:56', '%Y-%m-%d %H:%M:%S'))
         url_open.assert_called_with('http://www.bialystokonline.pl/domy-mieszkania-sprzedam,ogloszenia,5,1.html')
         self.assertEqual(offers.__len__(), 9)
+        self.assertEqual(offers[0]._id,  '4169627')
+        self.assertEqual(offers[8]._id,  '4169790')
 
     @mock.patch('offers_finder.urlopen')
     def test_get_latest_offers_up_to_5_pages_when_older(self, url_open):

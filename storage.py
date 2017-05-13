@@ -36,6 +36,7 @@ class OffersStorage(object):
         })
 
         print("saved in mongo {}".format(result))
+        return result
 
     def __get_collection(self):
         collection = self.db.get_collection(app_config.COLLECTION_NAME)
@@ -51,4 +52,4 @@ class OffersStorage(object):
 
     def find_all(self):
         collection = self.__get_collection()
-        return collection.find().sort("creation_date", pymongo.DESCENDING)
+        return list(collection.find().sort("creation_date", pymongo.DESCENDING))

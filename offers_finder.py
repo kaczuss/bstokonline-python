@@ -17,9 +17,9 @@ class OffersFinder(object):
             filtered = list(filter(lambda o: o.creation_date > since, offers))
             all_offers.extend(filtered)
             if filtered.__len__() < offers.__len__():
-                return all_offers
+                break
 
-        return all_offers
+        return sorted(all_offers, key=lambda offer: offer.creation_date)
 
     def get_offers(self, html):
         soup = BeautifulSoup(html, 'html.parser')
