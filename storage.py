@@ -23,20 +23,19 @@ class OffersStorage(object):
 
     def store(self, offer):
         collection = self.__get_collection()
-        result = collection.insert_one({
-            '_id': offer._id,
-            'creation_date': offer.creation_date,
-            'premium': offer.premium,
-            'url': offer.url,
-            'title': offer.title,
-            'user': offer.user,
-            'description': offer.description,
-            'extra_url': offer.extra_url,
-            'price': offer.price
-        })
+        offer_to_insert = {'_id': offer._id,
+                 'creation_date': offer.creation_date,
+                 'premium': offer.premium,
+                 'url': offer.url,
+                 'title': offer.title,
+                 'user': offer.user,
+                 'description': offer.description,
+                 'extra_url': offer.extra_url,
+                 'price': offer.price}
+        result = collection.insert_one(offer_to_insert)
 
         print("saved in mongo {}".format(result))
-        return result
+        return offer_to_insert
 
     def __get_collection(self):
         collection = self.db.get_collection(app_config.COLLECTION_NAME)
