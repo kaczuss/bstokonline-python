@@ -1,5 +1,6 @@
+import re
+
 import os
-import time
 
 if os.getenv('bstok_env') is None:
     os.environ['bstok_env'] = 'test'
@@ -11,7 +12,16 @@ from storage import OffersStorage
 from offers_finder import OffersFinder
 
 
-def filtered(offer):
+def parse_price(price):
+    if price is None:
+        return 0
+    price = re.sub(" |zl|zł", '', price, flags=re.IGNORECASE)
+    if price.__len__() > 0 and price.isdigit():
+        return int(price)
+    return 0
+
+
+def filtered_words(offer):
     forbidden_words = ['kawalerk', 'sokolka', 'sokółka', 'sokólka', 'lewickie', 'juchnowiec', 'zabłudów', 'zabludow',
                        'zabłudów', 'zabludów', 'rajgrod', 'rajgród', '535-536-005', 'izabelin']
     for word in forbidden_words:
@@ -21,6 +31,11 @@ def filtered(offer):
             return True
 
     return False
+
+
+def filter_price(offer):
+    price = parse_price(offer.price)
+    return price > 400 * 1000
 
 
 def is_new_offer(new_offer, offers_to_ignore):
@@ -42,17 +57,14 @@ def run():
     for offer in offers:
         if not is_new_offer(offer, old_offers):
             print('offer already added {} with title {}'.format(offer._id, offer.title))
-        elif filtered(offer):
+        elif filtered_words(offer):
             print('offer {} was filtered with title {}'.format(offer._id, offer.title))
+        elif filter_price(offer):
+            print('offer {} was filtered with title {} because of price {}'.format(offer._id, offer.title, offer.price))
         else:
             Trello().add_offers([offer])
             added_offer = storage.store(offer)
             old_offers.append(added_offer)
             print('offer added {} with title {}'.format(offer._id, offer.title))
-            
+
     print("done")
-
-
-while True:
-    run()
-    time.sleep(15 * 60)
