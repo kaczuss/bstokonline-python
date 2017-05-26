@@ -13,7 +13,7 @@ from offers_finder import OffersFinder
 
 def filtered(offer):
     forbidden_words = ['kawalerk', 'sokolka', 'sokółka', 'sokólka', 'lewickie', 'juchnowiec', 'zabłudów', 'zabludow',
-                       'zabłudów', 'zabludów']
+                       'zabłudów', 'zabludów', 'rajgrod', 'rajgród', '535-536-005', 'izabelin']
     for word in forbidden_words:
         if word in offer.title.lower():
             return True
