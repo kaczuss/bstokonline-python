@@ -25,8 +25,8 @@ def filtered_words(offer):
     forbidden_words = ['kawalerk', 'sokolka', 'sokółka', 'sokólka', 'lewickie', 'juchnowiec', 'zabłudów', 'zabludow',
                        'zabłudów', 'zabludów', 'rajgrod', 'rajgród', '535-536-005', 'izabelin', 'ełk', 'elk',
                        'siedlisko', 'gródek', 'grodek', 'gródku', 'grodku', 'ciasne', 'niewodnica', 'niewodnicy',
-                       'antresol', 'solniczki', 'kurian', 'dobrzyniewo', 'augustowie', 'augustów', 'choroszcz',
-                       'hajnówka', 'hajnówce', '2 pokoje', '2  pokoje', 'parter', 'dwupokojowe', '2pok', '2-pok']
+                       'solniczki', 'kurian', 'dobrzyniewo', 'augustowie', 'augustów', 'choroszcz',
+                       'hajnówka', 'hajnówce', '2 pokoje', '2  pokoje', 'dwupokojowe', '2pok', '2-pok']
     for word in forbidden_words:
         if word in offer.title.lower():
             print('forbidden word in title is {}'.format(word))
