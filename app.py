@@ -29,8 +29,10 @@ def filtered_words(offer):
                        'hajnówka', 'hajnówce', '2 pokoje', '2  pokoje', 'parter', 'dwupokojowe', '2pok', '2-pok']
     for word in forbidden_words:
         if word in offer.title.lower():
+            print('forbidden word in title is {}'.format(word))
             return True
         if word in offer.description.lower():
+            print('forbidden word in description is {}'.format(word))
             return True
 
     return False
