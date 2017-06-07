@@ -26,7 +26,8 @@ def filtered_words(offer):
                        'zabłudów', 'zabludów', 'rajgrod', 'rajgród', '535-536-005', 'izabelin', 'ełk', 'elk',
                        'siedlisko', 'gródek', 'grodek', 'gródku', 'grodku', 'ciasne', 'niewodnica', 'niewodnicy',
                        'solniczki', 'kurian', 'dobrzyniewo', 'augustowie', 'augustów', 'choroszcz',
-                       'hajnówka', 'hajnówce', '2 pokoje', '2  pokoje', 'dwupokojowe', '2pok', '2-pok', 'boboli']
+                       'hajnówka', 'hajnówce', '2 pokoje', '2  pokoje', 'dwupokojowe', '2pok', '2-pok', 'boboli',
+                       '2 pokojowe']
     for word in forbidden_words:
         if word in offer.title.lower():
             print('forbidden word in title is {}'.format(word))
