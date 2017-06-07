@@ -27,15 +27,28 @@ def filtered_words(offer):
                        'siedlisko', 'gródek', 'grodek', 'gródku', 'grodku', 'ciasne', 'niewodnica', 'niewodnicy',
                        'solniczki', 'kurian', 'dobrzyniewo', 'augustowie', 'augustów', 'choroszcz',
                        'hajnówka', 'hajnówce', '2 pokoje', '2  pokoje', 'dwupokojowe', '2pok', '2-pok', 'boboli',
-                       '2 pokojowe']
+                       '2 pokojowe', 'm-2', 'elk', 'ełk']
+    
     for word in forbidden_words:
-        if word in offer.title.lower():
-            print('forbidden word in title is {}'.format(word))
+        if check_word(offer, word):
             return True
-        if word in offer.description.lower():
-            print('forbidden word in description is {}'.format(word))
+        if check_word(offer, " " + word + "."):
+            return True
+        if check_word(offer, " " + word + ".,"):
+            return True
+        if check_word(offer, " " + word + " "):
             return True
 
+    return False
+
+
+def check_word(offer, word):
+    if word in offer.title.lower():
+        print('forbidden word in title is {}'.format(word))
+        return True
+    if word in offer.description.lower():
+        print('forbidden word in description is {}'.format(word))
+        return True
     return False
 
 
