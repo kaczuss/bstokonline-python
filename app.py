@@ -28,10 +28,8 @@ def filtered_words(offer):
                        'solniczki', 'kurian', 'dobrzyniewo', 'augustowie', 'augustów', 'choroszcz',
                        'hajnówka', 'hajnówce', '2 pokoje', '2  pokoje', 'dwupokojowe', '2pok', '2-pok', 'boboli',
                        '2 pokojowe', 'm-2', 'elk', 'ełk']
-    
+
     for word in forbidden_words:
-        if check_word(offer, word):
-            return True
         if check_word(offer, " " + word + "."):
             return True
         if check_word(offer, " " + word + ".,"):
