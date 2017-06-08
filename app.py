@@ -27,7 +27,7 @@ def filtered_words(offer):
                        'siedlisko', 'gródek', 'grodek', 'gródku', 'grodku', 'ciasne', 'niewodnica', 'niewodnicy',
                        'solniczki', 'kurian', 'dobrzyniewo', 'augustowie', 'augustów', 'choroszcz',
                        'hajnówka', 'hajnówce', '2 pokoje', '2  pokoje', 'dwupokojowe', '2pok', '2-pok', 'boboli',
-                       '2 pokojowe', 'm-2', '2 pok', 'elk', 'ełk', 'kawalerkę']
+                       '2 pokojowe', 'm-2', '2 pok', '2-pokojowe', 'elk', 'ełk', 'kawalerkę']
 
     for word in forbidden_words:
         if check_word(offer, " " + word + "."):
