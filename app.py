@@ -32,7 +32,9 @@ def filtered_words(offer):
     for word in forbidden_words:
         if check_word(offer, " " + word + "."):
             return True
-        if check_word(offer, " " + word + ".,"):
+        if check_word(offer, " " + word + ","):
+            return True
+        if check_word(offer, " " + word + "/"):
             return True
         if check_word(offer, " " + word + " "):
             return True
