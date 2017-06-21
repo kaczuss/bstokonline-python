@@ -4,7 +4,7 @@ set -x
 set +e
 docker stop $(docker ps  -f ancestor=ogloszenia -q)
 set -e
-mkdir -p /app
+
 cd /app
 
 tar xvf dockerized.tar
