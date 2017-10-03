@@ -12,5 +12,5 @@ rm dockerized.tar
 
 docker build -t ogloszenia .
 
-docker run -d -e bstok_env='prod' ogloszenia
+docker run --restart unless-stopped -d -e bstok_env='prod' ogloszenia
 
