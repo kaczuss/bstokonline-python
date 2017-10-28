@@ -16,6 +16,9 @@ app_config = importlib.import_module('app_config_{}'.format(os.getenv('bstok_env
 
 max_price = getattr(app_config, 'MAX_PRICE', 400 * 1000)
 
+white_list_words = getattr(app_config, 'WORDS_WHITE_LIST', [])
+
+
 def parse_price(price):
     if price is None:
         return 0
@@ -23,6 +26,27 @@ def parse_price(price):
     if price.__len__() > 0 and price.isdigit():
         return int(price)
     return 0
+
+
+def filter_white_list(offer):
+
+    if not white_list_words:
+        return False
+
+    for word in white_list_words:
+        if check_word(offer, " " + word + "."):
+            return False
+        if check_word(offer, " " + word + ","):
+            return False
+        if check_word(offer, " " + word + "/"):
+            return False
+        if check_word(offer, " " + word + " "):
+            return False
+        if word.__len__() > 4:
+            if check_word(offer, word):
+                return False
+
+    return True
 
 
 def filtered_words(offer):
@@ -46,10 +70,10 @@ def filtered_words(offer):
 
 def check_word(offer, word):
     if word in offer.title.lower():
-        print('forbidden word in title is {}'.format(word))
+        print('word in title is {}'.format(word))
         return True
     if word in offer.description.lower():
-        print('forbidden word in description is {}'.format(word))
+        print('word in description is {}'.format(word))
         return True
     return False
 
@@ -79,9 +103,12 @@ def run():
         if not is_new_offer(offer, old_offers):
             print('offer already added {} with title {}'.format(offer._id, offer.title))
         elif filtered_words(offer):
-            print('offer {} was filtered with title {}'.format(offer._id, offer.title))
+            print('offer {} was filtered with title {} because of forbidden words'.format(offer._id, offer.title))
         elif filter_price(offer):
             print('offer {} was filtered with title {} because of price {}'.format(offer._id, offer.title, offer.price))
+        elif filter_white_list(offer):
+            print('offer {} was filtered with title {} because of no words from white list'.format(offer._id,
+                                                                                                   offer.title))
         else:
             Trello().add_offers([offer])
             added_offer = storage.store(offer)
