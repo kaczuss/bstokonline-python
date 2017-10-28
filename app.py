@@ -14,6 +14,8 @@ from offers_finder import OffersFinder
 
 app_config = importlib.import_module('app_config_{}'.format(os.getenv('bstok_env')))
 
+max_price = getattr(app_config, 'MAX_PRICE', 400 * 1000)
+
 def parse_price(price):
     if price is None:
         return 0
@@ -24,9 +26,8 @@ def parse_price(price):
 
 
 def filtered_words(offer):
-    forbidden_words = []
-    if app_config.FORBIDDEN_WORDS is not None:
-        forbidden_words = app_config.FORBIDDEN_WORDS
+    forbidden_words = getattr(app_config, 'FORBIDDEN_WORDS', [])
+
     for word in forbidden_words:
         if check_word(offer, " " + word + "."):
             return True

@@ -11,3 +11,5 @@ BOARD_NAME='Ogloszenia'
 COLLECTION_NAME='offers'
 
 FORBIDDEN_WORDS = ['sokolka', 'sokółka', 'sokólka']
+
+MAX_PRICE = 400000
