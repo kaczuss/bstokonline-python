@@ -8,6 +8,7 @@ from pymongo import MongoClient
 
 app_config = importlib.import_module('app_config_{}'.format(os.getenv('bstok_env')))
 
+days_to_check = getattr(app_config, "DAYS_TO_CHECK", 7)
 
 class OfferEncoder(JSONEncoder):
     def default(self, o):
@@ -47,7 +48,7 @@ class OffersStorage(object):
         count = result.count()
         if count > 0:
             return result.next()['creation_date']
-        return datetime.now() - timedelta(days=7)
+        return datetime.now() - timedelta(days=days_to_check)
 
     def find_all(self):
         collection = self.__get_collection()

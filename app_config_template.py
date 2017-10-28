@@ -13,3 +13,5 @@ COLLECTION_NAME='offers'
 FORBIDDEN_WORDS = ['sokolka', 'sokółka', 'sokólka']
 
 MAX_PRICE = 400000
+
+DAYS_TO_CHECK = 7
