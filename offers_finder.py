@@ -1,7 +1,13 @@
+import importlib
 from datetime import datetime
 from urllib.request import urlopen
 
+import os
 from bs4 import BeautifulSoup
+
+app_config = importlib.import_module('app_config_{}'.format(os.getenv('bstok_env')))
+
+max_pages = getattr(app_config, 'MAX_PAGES', 6)
 
 
 class OffersFinder(object):
@@ -10,7 +16,7 @@ class OffersFinder(object):
 
     def get_latest_offers(self, since):
         all_offers = list()
-        for i in range(1, 6):
+        for i in range(1, max_pages):
             url = 'http://www.bialystokonline.pl/domy-mieszkania-sprzedam,ogloszenia,5,{}.html'.format(i)
             data = urlopen(url).read()
             offers = self.get_offers(data)
