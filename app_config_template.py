@@ -9,3 +9,5 @@ MONGO_URL='mongodb://xxx'
 DB_NAME='prod'
 BOARD_NAME='Ogloszenia'
 COLLECTION_NAME='offers'
+
+FORBIDDEN_WORDS = ['sokolka', 'sokółka', 'sokólka']

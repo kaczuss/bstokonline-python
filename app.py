@@ -1,3 +1,4 @@
+import importlib
 import re
 
 import os
@@ -11,6 +12,7 @@ from trello_integration import Trello
 from storage import OffersStorage
 from offers_finder import OffersFinder
 
+app_config = importlib.import_module('app_config_{}'.format(os.getenv('bstok_env')))
 
 def parse_price(price):
     if price is None:
@@ -22,12 +24,9 @@ def parse_price(price):
 
 
 def filtered_words(offer):
-    forbidden_words = ['kawalerk', 'sokolka', 'sokółka', 'sokólka', 'lewickie', 'juchnowiec', 'zabłudów', 'zabludow',
-                       'zabłudów', 'zabludów', 'rajgrod', 'rajgród', '535-536-005', 'izabelin',
-                       'siedlisko', 'gródek', 'grodek', 'gródku', 'grodku', 'ciasne', 'niewodnica', 'niewodnicy',
-                       'solniczki', 'kurian', 'dobrzyniewo', 'augustowie', 'augustów', 'choroszcz',
-                       'hajnówka', 'hajnówce', 'boboli', 'elk', 'ełk', 'kawalerkę', 'kawalerke', 'kawalerka']
-
+    forbidden_words = []
+    if app_config.FORBIDDEN_WORDS is not None:
+        forbidden_words = app_config.FORBIDDEN_WORDS
     for word in forbidden_words:
         if check_word(offer, " " + word + "."):
             return True
