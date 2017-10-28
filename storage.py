@@ -9,6 +9,8 @@ from pymongo import MongoClient
 app_config = importlib.import_module('app_config_{}'.format(os.getenv('bstok_env')))
 
 days_to_check = getattr(app_config, "DAYS_TO_CHECK", 7)
+ignore_last_offer_date = getattr(app_config, "IGNORE_LAST_OFFER_DATE", False)
+
 
 class OfferEncoder(JSONEncoder):
     def default(self, o):
@@ -25,14 +27,14 @@ class OffersStorage(object):
     def store(self, offer):
         collection = self.__get_collection()
         offer_to_insert = {'_id': offer._id,
-                 'creation_date': offer.creation_date,
-                 'premium': offer.premium,
-                 'url': offer.url,
-                 'title': offer.title,
-                 'user': offer.user,
-                 'description': offer.description,
-                 'extra_url': offer.extra_url,
-                 'price': offer.price}
+                           'creation_date': offer.creation_date,
+                           'premium': offer.premium,
+                           'url': offer.url,
+                           'title': offer.title,
+                           'user': offer.user,
+                           'description': offer.description,
+                           'extra_url': offer.extra_url,
+                           'price': offer.price}
         result = collection.insert_one(offer_to_insert)
 
         print("saved in mongo {}".format(result))
@@ -43,11 +45,13 @@ class OffersStorage(object):
         return collection
 
     def find_latest_date(self):
-        collection = self.__get_collection()
-        result = collection.find().sort("creation_date", pymongo.DESCENDING).limit(1)
-        count = result.count()
-        if count > 0:
-            return result.next()['creation_date']
+        if not ignore_last_offer_date:
+            collection = self.__get_collection()
+            result = collection.find().sort("creation_date", pymongo.DESCENDING).limit(1)
+            count = result.count()
+            if count > 0:
+                return result.next()['creation_date']
+
         return datetime.now() - timedelta(days=days_to_check)
 
     def find_all(self):
