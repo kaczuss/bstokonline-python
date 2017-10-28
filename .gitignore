@@ -7,3 +7,4 @@ __pycache__/
 *.tar
 deploy.sh
 /app_config_prod_old.py
+/app_config_szeregowki.py
