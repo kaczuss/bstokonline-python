@@ -61,7 +61,7 @@ def filtered_words(offer):
             return True
         if check_word(offer, " " + word + " "):
             return True
-        if word.__len__() > 4:
+        if word.__len__() > 4 or word.lower() == "dom":
             if check_word(offer, word + " "):
                 return True
 
