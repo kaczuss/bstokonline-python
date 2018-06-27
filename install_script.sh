@@ -8,6 +8,18 @@ if [ -z "$SERVER" ]; then
     exit 1
 fi
 
-scp docker_scripts/install-docker.sh root@${SERVER}:
+PORT=${2}
 
-ssh -t root@${SERVER} "./install-docker.sh"
+if [ -z "$PORT" ]; then
+    PORT=22
+fi
+
+USER=${3}
+
+if [ -z "$USER" ]; then
+    USER='root'
+fi
+
+scp -P ${PORT} docker_scripts/install-docker.sh ${USER}@${SERVER}:~/
+
+ssh -t -p ${PORT} ${USER}@${SERVER} "./install-docker.sh"
